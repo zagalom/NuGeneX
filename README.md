@@ -1,27 +1,75 @@
-# NuGeneX
-Nuclear Gene Extractor for Fragmented Assemblies. NuGeneX is a Python-based tool designed to extract and assemble full-length nuclear gene sequences from fragmented assemblies. It maps each target locus to the reference supplied and reconstructs contiguous sequences for downstream analyses.
-Summary:
+# NuGeneX — User-Friendly Gene Merge and Assessment Tool
 
-    Purpose: The script automates the process of refining gene assemblies (from FASTA files)—detecting duplicates, trimming, merging contigs, assessing sequence quality, and generating summary reports, with numerous customizable parameters for thresholds and scoring.
-    How it Works:
-        Input: Takes a directory of input FASTA files (assembled gene contigs), a reference gene FASTA, and outputs results to a specified directory.
-        Processing Includes:
-            Trimming contigs to match reference gene boundaries using local alignment.
-            Splitting contigs with ambiguous (N) regions.
-            Filtering contigs by minimum identity threshold.
-            Detecting potential gene duplications based on sequence similarity and overlap.
-            Attempting to merge overlapping contigs using several strategies (strict, standard, relaxed).
-            Scoring each sequence (or merged chain) based on similarity and completeness regarding the reference.
-        Outputs:
-            Best reconstructed gene version(s) for each input genome—either a single contig or a merged sequence—with annotated quality.
-            Logs detailing merge and duplication detection steps.
-            A summary CSV file reporting status ("Complete", "Failed", "Duplicated", etc.) for each gene across all processed genomes.
+NuGeneX is a feature-rich script for processing, merging, and QC'ing gene contigs against reference sequences. It enables reliable reconstruction of full-length gene sequences from fragmented assemblies and produces detailed quality and summary reports.
 
-Key Features:
+## Features
 
-    Automated handling of ambiguous regions, duplicate detection, and multi-round progressive merging of contigs.
-    Highly configurable through command-line arguments: scoring weights, overlap size thresholds, identity thresholds, etc.
-    Generates both detailed logs for troubleshooting and high-level CSV summaries for comparing gene assembly completeness/quality across samples.
+- **Contig Filtering:** Identity and overlap-based filtering and trimming with robust local alignment.
+- **Automated Merging:** Sensitive and customizable contig merging with multiple strategies (strict/relaxed).
+- **Duplicate Detection:** Evidence-based duplicate gene detection.
+- **Comprehensive QC:** Calculates similarity and completeness vs. references, with weighted scoring.
+- **Batch Processing:** Processes all genomes in a folder in a single run.
+- **Rich Outputs:** Produces FASTA, log, summary, and duplicate evidence files.
 
-Typical Use Case:
-Researchers who assemble draft genomes and want to reliably reconstruct AMR gene sequences (or similar genes) by merging fragmented contigs, detecting possible duplications, and scoring overall quality relative to reference genes.
+---
+
+## Quick Start
+
+You need Python 3 (with [Biopython](https://biopython.org/) and [python-Levenshtein](https://github.com/ztane/python-Levenshtein)):
+```sh
+pip install biopython python-Levenshtein
+```
+
+### **Basic Command**
+
+```sh
+python Merge_user_friendly.py -i <input_dir> -r <reference.fasta> -o <output_dir>
+```
+- `-i` : Folder with input FASTA files (one per genome)
+- `-r` : Reference FASTA file (with gene sequences)
+- `-o` : Folder for results and logs
+
+### **Complete Example**
+
+```sh
+python Merge_user_friendly.py \
+  -i input_folder \
+  -r resistance_genes.fasta \
+  -o results/
+```
+
+### **Advanced Options**
+
+- `-s` : Weight for similarity in scoring (default: 6)
+- `-c` : Weight for completeness in scoring (default: 4)
+- `-m` : Minimum overlap for merging (default: 40)
+- `-M` : Minimum overlap for relaxed-merge (default: 5)
+- `-l` : Minimum alignment length for duplicate detection (default: 100)
+- `-I` : Minimum contig identity (%) (default: 98)
+
+Example:
+```sh
+python Merge_user_friendly.py \
+  -i input_folder \
+  -r reference.fasta \
+  -o output_folder \
+  -s 8 -c 2 -m 30 -M 10 -l 80 -I 95
+```
+
+---
+
+## Outputs
+
+- `<genome>_resistance_genes_final.fasta`   — Final gene set, best version per gene
+- `<genome>_merge_details.log`              — Step-by-step merge logs
+- `<genome>_details.txt`                    — Duplicate gene evidence
+- `<genome>_resistance_merged_genes.fasta`  — Merged (multi-contig) gene reconstructions
+- `gene_status_summary.csv`                 — One-line-per-genome summary table marking Complete/Failed/Duplicated genes
+
+---
+
+## Citation & Support
+
+If you use NuGeneX, please cite the repository. For bug reports and feature requests, open an issue on GitHub.
+
+---
