@@ -1,4 +1,4 @@
-# NuGeneX — User-Friendly Gene Merge and Assessment Tool
+# NuGeneX — User-Friendly Nuclear Gene Merge and Assessment Tool
 
 NuGeneX is a feature-rich script for processing, merging, and QC'ing gene contigs against reference sequences. It enables reliable reconstruction of full-length gene sequences from fragmented assemblies and produces detailed quality and summary reports.
 
@@ -68,8 +68,16 @@ python Merge_user_friendly.py \
 
 ---
 
-## Citation & Support
+**Developed by @zagalom**  
+See LICENSE for MIT terms. For questions/issues/collaborations, please open an issue.
 
-If you use NuGeneX, please cite the repository. For bug reports and feature requests, open an issue on GitHub.
+## Citation & Contact
+
+Developed by [@zagalom](https://github.com/zagalom)  If you use NuGeneX, please cite the repository.
+For questions, bug reports, or collaborations, please open [an issue](https://github.com/zagalom/HapHap/issues).
 
 ---
+
+## License
+
+Released under the MIT license. See [LICENSE](LICENSE) for details.
