@@ -60,11 +60,11 @@ python NuGeneX.py \
 
 ## Outputs
 
-- `<genome>_resistance_genes_final.fasta`   — Final gene set, best version per gene
-- `<genome>_merge_details.log`              — Step-by-step merge logs
-- `<genome>_details.txt`                    — Duplicate gene evidence
-- `<genome>_resistance_merged_genes.fasta`  — Merged (multi-contig) gene reconstructions
-- `gene_status_summary.csv`                 — One-line-per-genome summary table marking Complete/Failed/Duplicated genes
+- `<genome>_genes_final.fasta`   — Final gene set, best version per gene
+- `<genome>_merge_details.log`   — Step-by-step merge logs
+- `<genome>_details.txt`         — Duplicate gene evidence
+- `<genome>_merged_genes.fasta`  — Merged (multi-contig) gene reconstructions
+- `gene_status_summary.csv`      — One-line-per-genome summary table marking Complete/Failed/Duplicated genes
 
 ---
 
