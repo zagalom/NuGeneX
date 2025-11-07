@@ -23,7 +23,7 @@ pip install biopython python-Levenshtein
 ### **Basic Command**
 
 ```sh
-python Merge_user_friendly.py -i <input_dir> -r <reference.fasta> -o <output_dir>
+python NuGeneX.py -i <input_dir> -r <reference.fasta> -o <output_dir>
 ```
 - `-i` : Folder with input FASTA files (one per genome)
 - `-r` : Reference FASTA file (with gene sequences)
@@ -32,7 +32,7 @@ python Merge_user_friendly.py -i <input_dir> -r <reference.fasta> -o <output_dir
 ### **Complete Example**
 
 ```sh
-python Merge_user_friendly.py \
+python NuGeneX.py \
   -i input_folder \
   -r resistance_genes.fasta \
   -o results/
@@ -49,7 +49,7 @@ python Merge_user_friendly.py \
 
 Example:
 ```sh
-python Merge_user_friendly.py \
+python NuGeneX.py \
   -i input_folder \
   -r reference.fasta \
   -o output_folder \
@@ -73,7 +73,7 @@ See LICENSE for MIT terms. For questions/issues/collaborations, please open an i
 
 ## Citation & Contact
 
-Developed by [@zagalom](https://github.com/zagalom)  If you use NuGeneX, please cite the repository.
+Developed by [@zagalom](https://github.com/zagalom).  If you use NuGeneX, please cite the repository.
 For questions, bug reports, or collaborations, please open [an issue](https://github.com/zagalom/HapHap/issues).
 
 ---
