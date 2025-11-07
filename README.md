@@ -1,4 +1,4 @@
-# NuGeneX — User-Friendly Nuclear Gene Merge and Assessment Tool
+# NuGeneX: Nuclear Gene Extractor and assembler for Fragmented Assemblies
 
 NuGeneX is a feature-rich script for processing, merging, and QC'ing gene contigs against reference sequences. It enables reliable reconstruction of full-length gene sequences from fragmented assemblies and produces detailed quality and summary reports.
 
