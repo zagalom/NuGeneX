@@ -613,9 +613,9 @@ def process_files_in_directory(input_dir, reference_fasta, output_dir,
     references = {record.id: record.seq for record in SeqIO.parse(reference_fasta, "fasta")}
     
     for filename in os.listdir(input_dir):
-        if filename.endswith("_resistance_genes.fasta"):
+        if filename.endswith("_genes.fasta"):
             input_fasta = os.path.join(input_dir, filename)
-            genome_name = filename.replace("_q30_scaffolds_resistance_genes.fasta", "")
+            genome_name = filename.replace("_scaffolds_genes.fasta", "")
             print(f"Processing: {genome_name}")
             
             # Initialize for each genome
@@ -808,10 +808,10 @@ def process_files_in_directory(input_dir, reference_fasta, output_dir,
                     best_versions[gene_name] = seq_record
 
             # Write all output files
-            output_fasta = os.path.join(output_dir, f"{genome_name}_resistance_genes_final.fasta")
+            output_fasta = os.path.join(output_dir, f"{genome_name}_genes_final.fasta")
             merge_log_file = os.path.join(output_dir, f"{genome_name}_merge_details.log")
             details_file = os.path.join(output_dir, f"{genome_name}_details.txt")
-            merged_genes_file = os.path.join(output_dir, f"{genome_name}_resistance_merged_genes.fasta")
+            merged_genes_file = os.path.join(output_dir, f"{genome_name}_merged_genes.fasta")
             
             # Write files
             with open(output_fasta, "w") as f:
@@ -997,8 +997,8 @@ def generate_summary_report(output_dir, output_summary="gene_status_summary.csv"
     
     # First pass: collect results from final fasta files
     for filename in os.listdir(output_dir):
-        if filename.endswith("_resistance_genes_final.fasta"):
-            genome_name = filename.replace("_resistance_genes_final.fasta", "")
+        if filename.endswith("_genes_final.fasta"):
+            genome_name = filename.replace("_genes_final.fasta", "")
             fasta_path = os.path.join(output_dir, filename)
             
             # Initialize results for this genome
@@ -1111,3 +1111,4 @@ Note: total_weight is automatically calculated as sim_weight + comp_weight
     
     # Generate summary report
     generate_summary_report(args.output_dir)
+
