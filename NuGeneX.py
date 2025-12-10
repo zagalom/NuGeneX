@@ -2,12 +2,51 @@ import os
 import subprocess
 import argparse
 import re
+import sys
+import shutil
+import platform
 from functools import lru_cache
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
-from Bio.Align import PairwiseAligner
-from Levenshtein import distance as levenshtein_distance
+
+# Check for required Python packages and provide helpful instructions if missing
+_missing_packages = []
+try:
+    from Bio import SeqIO
+    from Bio.Seq import Seq
+    from Bio.SeqRecord import SeqRecord
+    from Bio.Align import PairwiseAligner
+except ModuleNotFoundError:
+    _missing_packages.append("biopython (pip install biopython)")
+
+try:
+    from Levenshtein import distance as levenshtein_distance
+except ModuleNotFoundError:
+    _missing_packages.append("python-Levenshtein (pip install python-Levenshtein)")
+
+if _missing_packages:
+    print("❌ Missing required Python packages: " + ", ".join(_missing_packages))
+    print("\nPlease install them. Example (Windows):")
+    print("  python -m pip install --upgrade pip")
+    print("  python -m pip install biopython python-Levenshtein")
+    print("\nOr using a virtual environment:")
+    print("  python -m venv venv")
+    if platform.system() == "Windows":
+        print("  .\\venv\\Scripts\\activate")
+    else:
+        print("  source venv/bin/activate")
+    print("  pip install biopython python-Levenshtein")
+
+    # Check for BLAST+ tools and provide a hint if missing
+    missing_tools = []
+    for tool in ("makeblastdb", "blastn"):
+        if shutil.which(tool) is None:
+            missing_tools.append(tool)
+
+    if missing_tools:
+        print("\nAlso, the following external BLAST+ tools were not found on your PATH: " + ", ".join(missing_tools))
+        print("If you need to run BLAST from this script, download BLAST+ from:")
+        print("  https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/")
+        print("Then add the directory containing makeblastdb and blastn to your PATH.")
+    sys.exit(1)
 
 # ==============================================================================
 # --- STEP 1: CREATE BLAST DATABASES ---
@@ -858,3 +897,4 @@ if __name__ == "__main__":
 
     # 4. Run the pipeline
     main_pipeline(args)
+
