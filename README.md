@@ -1,6 +1,6 @@
 #  NuGeneX: Nuclear Gene Extractor and assembler for Fragmented Assemblies
 
-**NuGeneX** is a four-step automated pipeline for the reconstruction and evaluation of nuclear genes from draft assemblies. In its development used *Candida albicans* (and other yeasts) as a models.  
+**NuGeneX** is a four-step automated pipeline for the reconstruction and evaluation of nuclear genes from draft assemblies. In its development, it was used *Candida albicans* (and other yeasts) as a model.  
 It integrates BLAST-based gene detection, contig extraction, overlap assembly, and sequence evaluation into a fully automated workflow optimized for large datasets.
 
 ---
